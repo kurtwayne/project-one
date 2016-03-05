@@ -6,6 +6,9 @@ gem 'rails', '4.2.5'
 # Authentication
 gem 'devise'
 
+# Used for User Roles
+gem 'pundit'
+
  group :production do
   # gem 'pg'
    gem 'rails_12factor'
