@@ -10,7 +10,28 @@ class WikiPolicy < ApplicationPolicy
     @wiki = wiki
   end
 
+  def create?
+    puts "wheeeeeee"
+    true unless user.nil?
+  end
+
   def update?
+<<<<<<< Updated upstream
     user.admin? or not post.published?
+=======
+    return false unless user.admin? or user.premium?
+    return false if wiki.published?
+    true
+  end
+
+  def destroy?
+    return false unless user.admin?
+    return false if wiki.published?
+    true
+  end
+
+  def publish?
+    true
+>>>>>>> Stashed changes
   end
 end

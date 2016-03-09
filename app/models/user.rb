@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   # User Role Authorization
   def can_edit?(wiki)
-    true if owns?(wiki) || admin?
+    true if owns?(wiki) || admin? or premium?
   end
 
   def can_destroy?(wiki)
@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
 
   def admin?
     true if self.role_name == :admin
+  end
+
+  def premium?
+    true if self.role_name == :premium
   end
 
   def role_name
