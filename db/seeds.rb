@@ -17,6 +17,14 @@ require 'faker'
 end
 wikis = Wiki.all
 
+# Create and admin user
+admin = User.create!(
+name:     'Admin User',
+   email:    'kurtwgardner@gmail.com',
+   password: 'helloworld',
+   role:     'admin'
+)
+
 puts "Faker Seed Finished"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"

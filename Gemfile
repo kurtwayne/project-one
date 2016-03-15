@@ -9,6 +9,9 @@ gem 'devise'
 # Used for User Roles
 gem 'pundit'
 
+# Payment processing with Stripe
+gem 'stripe'
+
  group :production do
   # gem 'pg'
    gem 'rails_12factor'
