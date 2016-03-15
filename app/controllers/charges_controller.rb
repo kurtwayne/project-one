@@ -1,5 +1,8 @@
 class ChargesController < ApplicationController
   def create
+    # Amount in cents
+    @amount = 1500
+
     #Creates a Stripe Customer object, for associating with the Charge
     customer = Stripe::Customer.creat(
       email: current_user.email,
@@ -9,7 +12,7 @@ class ChargesController < ApplicationController
     #Where the real magic happens
     charge = Stripe::Charge.create(
     customer: customer.id, # Note -- this is not user_id
-    amount: Amount.default,
+    amount: @amount,
     description: "BigMoney Membership - #{current_user.email}",
     currency: 'usd'
     )
@@ -29,6 +32,6 @@ def new
   @stripe_btn_data = {
     key: "#{ Rails.configuration.stripe[:publishable_key] }",
     description: "BigMoney Membership - #{current_user.name}",
-    amount: Amount.default
+    amount: @amount
   }
 end
