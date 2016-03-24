@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     true if self.role_name == :premium
   end
 
+  def standard?
+    true if self.role_name == :standard
+  end
+
   def role_name
     User.user_roles.key(self.role)
   end
@@ -52,11 +56,4 @@ class User < ActiveRecord::Base
   def self.user_roles
     USER_ROLES
   end
-
-  # after_initialize :init
-
-  # def init
-    # self.number   ||= 10
-    # self.standard ||= build_standard
-  # end
 end
