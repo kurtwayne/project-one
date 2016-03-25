@@ -43,7 +43,7 @@ class ChargesController < ApplicationController
   def update
     if @charge.save
       current_user.downgrade
-      redirect_to charges_path
+      redirect_to root_path
     else
       flash.now[:alert] = "There was an error."
       render :new

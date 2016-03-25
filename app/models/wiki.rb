@@ -5,4 +5,7 @@ class Wiki < ActiveRecord::Base
 
   def published?
   end
+
+  def public
+  end
 end

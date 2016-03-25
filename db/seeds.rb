@@ -17,9 +17,8 @@ require 'faker'
 end
 wikis = Wiki.all
 
-# Create and admin user
+# Create an admin user
 admin = User.create!(
-name:     'Admin User',
    email:    'kurtwgardner@gmail.com',
    password: 'helloworld',
    role:     'admin'

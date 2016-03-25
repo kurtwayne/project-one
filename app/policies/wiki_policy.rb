@@ -16,9 +16,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-<<<<<<< Updated upstream
     user.admin? or not post.published?
-=======
     return false unless user.admin? or user.premium?
     return false if wiki.published?
     true
@@ -32,6 +30,5 @@ class WikiPolicy < ApplicationPolicy
 
   def publish?
     true
->>>>>>> Stashed changes
   end
 end
