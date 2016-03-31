@@ -8,22 +8,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <div class="container">
-    <ul clasee="nav nav-tabs">
-      <% link_to "Blocipedia", root_path %>
-      <% link_to "Wikis", wikis_path %>
-    </ul>
-  </div>
-
-  <div class="pull-right">
-    <% if user_signed_in? %>
-     Signed in as: <strong><%= current_user.email %></strong> |
-     <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> - <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-    <% else %>
-     <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %> -
-     <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %>
-    <% end %>
+<%= navbar fixed: :top do %>
+  <%= navbar_header brand: 'Blocipedia', brand_link: '/' %>
+  <%= navbar_collapse do %>
+     <%= navbar_group class: 'foo', id: 'menu' do %>
+       <%= navbar_text 'Pick an option:' %>
+       <%= navbar_item "Home", '/' %>
+       <%= navbar_item "Wikis", '/wikis' %>
+       <%= navbar_item 'Upgrade Account', '/charges/new' %>
+       <%= navbar_dropdown "Stuff" do %>
+         <%= navbar_dropdown_header 'Great stuff!' %>
+         <%= navbar_item "Go Premium", '/charges/new' %>
+          <% if user_signed_in? %>
+           <%= navbar_dropdown_divider %>
+           <%= navbar_item "Edit Profile", edit_user_registration_path %>
+          <% end %>
+        <% end %>
+      <% end %>
+     <%= navbar_group align: 'right' do %>
+       <% if user_signed_in? %>
+       <%= navbar_item current_user.email, edit_user_registration_path %>
+       <%= navbar_item "Sign Out", 'users/sign_out' method: :delete %>
+       <% else %>
+         <%= navbar_item "Sign Up", new_user_registration_path %>
+         <%= navbar_item "Sign In", new_user_session_path %>
+       <% end %>
+     <% end %>
+  <% end %>
+<% end %>
 
     <div class="flash">
       <% if flash[:notice] %>
@@ -43,7 +55,7 @@
        </div>
       <% end %>
     </div>
-  </div>
+
 
 <%= yield %>
 

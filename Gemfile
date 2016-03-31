@@ -6,6 +6,9 @@ gem 'rails', '4.2.5'
 # Authentication
 gem 'devise'
 
+# Navigation Bar
+gem 'rails_bootstrap_navbar'
+
 # Used for User Roles
 gem 'pundit'
 
