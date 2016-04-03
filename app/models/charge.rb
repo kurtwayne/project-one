@@ -4,31 +4,22 @@ class Charge < ActiveRecord::Base
 # Upgrading and Downgrading Accounts
 
   def upgrade
-    current_user.update_attributes(role: "premium")
-  end
+    current_user.set_as_premium
+    current_user.save
 
-  def downgrade
-  subscription = current_user.subscription
-
-    if subscription.delete
-      downgrade_user_to_standard
-      current_user_downgrade_wikis
-      flash[:success] = "Successfully cancelled premium subscription"
-      redirect_to root_path
-    else
-      flash[:error] = "Can't cancel at this moment."
-      redirect_to root_path
+    privatewikis = current_user.wikis.where(private: false)
+    privatewikis.each do |privatewiki|
+      privatewiki.update_attributes(:private, true)
     end
   end
 
-  def downgrade_user_to_standard
-    current_user.update_attributes(role: "standard")
-  end
+  def downgrade
+    current_user.set_as_standard
+    current_user.save
 
-  def current_user_downgrade_wikis
     privatewikis = current_user.wikis.where(private: true)
-    privatewikis.each do |privatewikis|
-      privatewikis.update_attributes(:private, false)
+    privatewikis.each do |privatewiki|
+      privatewiki.update_attributes(:private, false)
     end
   end
 end

@@ -24,6 +24,20 @@ admin = User.create!(
    role:     'admin'
 )
 
+# Create a Premium User
+premium = User.create!(
+   email:    'kurt@gmail.com',
+   password: 'helloworld',
+   role:     'premium'
+)
+
+# Create a Premium User
+standard = User.create!(
+  email:    'wayne@gmail.com',
+  password: 'helloworld',
+  role:     'standard'
+)
+
 puts "Faker Seed Finished"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"

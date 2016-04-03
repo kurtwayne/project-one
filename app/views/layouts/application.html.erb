@@ -8,7 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= navbar fixed: :top do %>
+<%= navbar container: 'fluid' do %>
   <%= navbar_header brand: 'Blocipedia', brand_link: '/' %>
   <%= navbar_collapse do %>
      <%= navbar_group class: 'foo', id: 'menu' do %>
@@ -18,7 +18,7 @@
        <%= navbar_item 'Upgrade Account', '/charges/new' %>
        <%= navbar_dropdown "Stuff" do %>
          <%= navbar_dropdown_header 'Great stuff!' %>
-         <%= navbar_item "Go Premium", '/charges/new' %>
+         <%= navbar_item "Go Premium", new_charge_path %>
           <% if user_signed_in? %>
            <%= navbar_dropdown_divider %>
            <%= navbar_item "Edit Profile", edit_user_registration_path %>
@@ -26,9 +26,9 @@
         <% end %>
       <% end %>
      <%= navbar_group align: 'right' do %>
-       <% if user_signed_in? %>
+       <% if current_user %>
        <%= navbar_item current_user.email, edit_user_registration_path %>
-       <%= navbar_item "Sign Out", 'users/sign_out' method: :delete %>
+       <%= navbar_item "Sign Out", session_path(current_user), method: :delete %>
        <% else %>
          <%= navbar_item "Sign Up", new_user_registration_path %>
          <%= navbar_item "Sign In", new_user_session_path %>
