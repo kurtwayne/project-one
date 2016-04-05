@@ -12,6 +12,9 @@ gem 'rails_bootstrap_navbar'
 # Used for User Roles
 gem 'pundit'
 
+# Markdown Text
+gem 'redcarpet', '~> 3.0.0'
+
 # Payment processing with Stripe
 gem 'stripe'
 
