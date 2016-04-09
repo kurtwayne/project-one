@@ -15,10 +15,10 @@
        <%= navbar_text 'Pick an option:' %>
        <%= navbar_item "Home", '/' %>
        <%= navbar_item "Wikis", '/wikis' %>
-       <%= navbar_item 'Upgrade Account', '/charges/new' %>
+       <%= navbar_item 'Upgrade Account', edit_user_path(@user) %>
        <%= navbar_dropdown "Stuff" do %>
          <%= navbar_dropdown_header 'Great stuff!' %>
-         <%= navbar_item "Go Premium", new_charge_path %>
+         <%= navbar_item "Go Premium", edit_user_path(@user) %>
           <% if user_signed_in? %>
            <%= navbar_dropdown_divider %>
            <%= navbar_item "Edit Profile", edit_user_registration_path %>

@@ -6,7 +6,7 @@
       <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
    <% end %>
    <% if current_user.premium? || current_user.admin? %>
-   <%= link_to "Revert to Standard", @charge, method: :update, class: 'btn btn-danger', data: {confirm: 'All private wikis will become public!'} %>
+    <%= link_to "Revert to Standard", @user, method: :update, class: 'btn btn-danger', data: {confirm: 'All private wikis will become public!'} %>
    <% end %>
    <% end %>
  </div>

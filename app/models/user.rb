@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  after_save :role_changed, if: :role_changed?
+
+  has_many :collaborators
+  has_many :wikis, through: :collaborators
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -9,6 +14,27 @@ class User < ActiveRecord::Base
     :standard => 10,
     :premium => 20
   }
+
+  def role_changed
+    self.upgrade if self.role == USER_ROLES[:premium]
+    self.downgrade if self.role == USER_ROLES[:standard]
+  end
+
+  def upgrade
+    puts "upgraded!!!"
+    privatewikis = self.wikis.where(private: false)
+    privatewikis.each do |privatewiki|
+      privatewiki.update_attributes(:private, true)
+    end
+  end
+
+  def downgrade
+    puts "downgraded!!!"
+    privatewikis = self.wikis.where(private: true)
+    privatewikis.each do |privatewiki|
+      privatewiki.update_attributes(:private, false)
+    end
+  end
 
   # Instance Methods to Define different Users
   def set_as_admin

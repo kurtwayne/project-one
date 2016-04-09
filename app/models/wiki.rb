@@ -3,6 +3,9 @@ class Wiki < ActiveRecord::Base
 
     scope :visible_to, -> (user) { user ? all : where(public: true) }
 
+    has_many :collaborators
+    has_many :users, through: :collaborators
+
   def published?
   end
 
