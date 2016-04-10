@@ -31,7 +31,7 @@ premium = User.create!(
    role:     'premium'
 )
 
-# Create a Premium User
+# Create a Standard User
 standard = User.create!(
   email:    'wayne@gmail.com',
   password: 'helloworld',

@@ -54,5 +54,4 @@ class WikiPolicy < ApplicationPolicy
        end
        wikis # return the wikis array we've built up
      end
-   end
 end
