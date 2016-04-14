@@ -44,10 +44,12 @@ class UsersController < ApplicationController
     end
 
     def edit
-      @user = User.find(params[:user_id])
+      @user = User.find(params[:id])
+      @users = User.all
     end
 
     def update
+      # you'll have the user id you want to create a collaborator from
       if @user.save
         current_user.downgrade
         redirect_to root_path

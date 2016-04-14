@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :charges
 
-  resources :user
+  resources :users
 
   root 'welcome#index'
 end
