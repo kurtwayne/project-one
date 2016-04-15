@@ -1,0 +1,15 @@
+<li class="nav pull-right">
+  <div id="user_nav">
+    <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-danger btn-mini' %>
+    <% else %>
+    <%= link_to new_user_registration_path do %>
+    <button class="btn-mini btn btn-info">Sign Up</button>
+    <% end %>
+    or <%= link_to new_user_session_path do %>
+    <button class="btn btn-info btn-mini">Sign In</button>
+    <% end %>
+    <% end %>
+  </div>
+</li>

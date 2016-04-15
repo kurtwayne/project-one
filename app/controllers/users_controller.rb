@@ -48,6 +48,9 @@ class UsersController < ApplicationController
       @users = User.all
     end
 
+    def show
+    end
+
     def update
       # you'll have the user id you want to create a collaborator from
       if @user.save

@@ -16,12 +16,14 @@ class WikisController < ApplicationController
   def new
     @wiki = Wiki.new
     authorize @wiki
+    @users = User.all
   end
 
   def create
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @users = User.all
 
     if @wiki.save
       flash[:notice] = "Wiki was saved."
@@ -34,6 +36,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all
   end
 
   def update
@@ -44,6 +47,7 @@ class WikisController < ApplicationController
 
     if @wiki.save
       flash[:notice] = "Wiki was updated."
+      @wiki.collaborators = Collaborator.update_collaborators(params[:wiki][:collaborators])
       redirect_to @wiki
     else
       flash.now[:alert] = "There was an error updating the wiki. Please try again."
@@ -67,5 +71,4 @@ class WikisController < ApplicationController
   def admin_list
     authorize Wiki
   end
-
 end
