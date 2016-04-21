@@ -15,7 +15,7 @@
        <%= navbar_text 'Pick an option:' %>
        <%= navbar_item "Home", '/' %>
        <%= navbar_item "Wikis", '/wikis' %>
-       <%= navbar_item 'Upgrade Account', 'users//edit' %>
+       <%= navbar_item 'Upgrade Account', edit_user_path(:id) %>
        <%= navbar_dropdown "Stuff" do %>
          <%= navbar_dropdown_header 'Great stuff!' %>
          <%= navbar_item "Go Premium", edit_user_registration_path %>

@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     end
 
     def edit
-      @user = User.find(params[:id])
+      #@user = User.find(params[:id])
       @users = User.all
     end
 
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       # you'll have the user id you want to create a collaborator from
       if @user.save
         current_user.downgrade
-        redirect_to root_path
+        redirect_to users_path
       else
         flash.now[:alert] = "There was an error."
         render :new
